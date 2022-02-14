@@ -37,8 +37,8 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>64</width>
-     <height>64</height>
+     <width>48</width>
+     <height>48</height>
     </size>
    </property>
   </widget>
@@ -142,7 +142,7 @@ p, li { white-space: pre-wrap; }
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="SearchBtn">
+  <widget class="QPushButton" name="Top10SearchBtn">
    <property name="geometry">
     <rect>
      <x>352</x>
@@ -152,7 +152,17 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="text">
-    <string>Find a Book!</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/search.png</normaloff>images/search.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>48</width>
+     <height>48</height>
+    </size>
    </property>
   </widget>
  </widget>

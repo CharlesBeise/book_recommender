@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/top_10_list_dialog.ui'
+# Form implementation generated from reading ui file 'ui/top_10_result.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -15,30 +15,38 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 600)
-        self.Top10GoBack = QtWidgets.QPushButton(Dialog)
-        self.Top10GoBack.setGeometry(QtCore.QRect(40, 40, 75, 75))
+        self.Top10BackBtn = QtWidgets.QPushButton(Dialog)
+        self.Top10BackBtn.setGeometry(QtCore.QRect(680, 40, 75, 75))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Top10GoBack.sizePolicy().hasHeightForWidth())
-        self.Top10GoBack.setSizePolicy(sizePolicy)
-        self.Top10GoBack.setText("")
+        sizePolicy.setHeightForWidth(self.Top10BackBtn.sizePolicy().hasHeightForWidth())
+        self.Top10BackBtn.setSizePolicy(sizePolicy)
+        self.Top10BackBtn.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui\\images/back.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.Top10GoBack.setIcon(icon)
-        self.Top10GoBack.setIconSize(QtCore.QSize(64, 64))
-        self.Top10GoBack.setObjectName("Top10GoBack")
+        self.Top10BackBtn.setIcon(icon)
+        self.Top10BackBtn.setIconSize(QtCore.QSize(48, 48))
+        self.Top10BackBtn.setObjectName("Top10BackBtn")
         self.GenreDisplayBox = QtWidgets.QTextBrowser(Dialog)
-        self.GenreDisplayBox.setGeometry(QtCore.QRect(275, 120, 250, 61))
+        self.GenreDisplayBox.setGeometry(QtCore.QRect(275, 120, 250, 60))
         self.GenreDisplayBox.setObjectName("GenreDisplayBox")
         self.Top10Title = QtWidgets.QTextBrowser(Dialog)
         self.Top10Title.setGeometry(QtCore.QRect(350, 50, 100, 40))
         self.Top10Title.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.Top10Title.setFrameShadow(QtWidgets.QFrame.Plain)
         self.Top10Title.setObjectName("Top10Title")
-        self.BookList = QtWidgets.QTextBrowser(Dialog)
-        self.BookList.setGeometry(QtCore.QRect(275, 190, 250, 381))
-        self.BookList.setObjectName("BookList")
+        self.Top10BookList = QtWidgets.QTextBrowser(Dialog)
+        self.Top10BookList.setGeometry(QtCore.QRect(275, 190, 250, 380))
+        self.Top10BookList.setObjectName("Top10BookList")
+        self.Top10HelpBtn = QtWidgets.QPushButton(Dialog)
+        self.Top10HelpBtn.setGeometry(QtCore.QRect(40, 40, 75, 75))
+        self.Top10HelpBtn.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ui\\images/QuestionMark.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.Top10HelpBtn.setIcon(icon1)
+        self.Top10HelpBtn.setIconSize(QtCore.QSize(48, 48))
+        self.Top10HelpBtn.setObjectName("Top10HelpBtn")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

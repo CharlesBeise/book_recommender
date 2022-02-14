@@ -13,10 +13,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="Top10GoBack">
+  <widget class="QPushButton" name="Top10BackBtn">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>680</x>
      <y>40</y>
      <width>75</width>
      <height>75</height>
@@ -37,8 +37,8 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>64</width>
-     <height>64</height>
+     <width>48</width>
+     <height>48</height>
     </size>
    </property>
   </widget>
@@ -48,7 +48,7 @@
      <x>275</x>
      <y>120</y>
      <width>250</width>
-     <height>61</height>
+     <height>60</height>
     </rect>
    </property>
   </widget>
@@ -75,14 +75,37 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Top 10&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="BookList">
+  <widget class="QTextBrowser" name="Top10BookList">
    <property name="geometry">
     <rect>
      <x>275</x>
      <y>190</y>
      <width>250</width>
-     <height>381</height>
+     <height>380</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Top10HelpBtn">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>75</width>
+     <height>75</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>images/QuestionMark.png</normaloff>images/QuestionMark.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>48</width>
+     <height>48</height>
+    </size>
    </property>
   </widget>
  </widget>

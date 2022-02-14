@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/top_10_dialog.ui'
+# Form implementation generated from reading ui file 'ui/top_10.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -26,7 +26,7 @@ class Ui_Dialog(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui\\images/home.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.Top10HomeButton.setIcon(icon)
-        self.Top10HomeButton.setIconSize(QtCore.QSize(64, 64))
+        self.Top10HomeButton.setIconSize(QtCore.QSize(48, 48))
         self.Top10HomeButton.setObjectName("Top10HomeButton")
         self.Top10HelpButton = QtWidgets.QPushButton(Dialog)
         self.Top10HelpButton.setGeometry(QtCore.QRect(40, 40, 75, 75))
@@ -52,9 +52,14 @@ class Ui_Dialog(object):
         self.genreBox.addItem("")
         self.genreBox.addItem("")
         self.genreBox.addItem("")
-        self.SearchBtn = QtWidgets.QPushButton(Dialog)
-        self.SearchBtn.setGeometry(QtCore.QRect(352, 430, 75, 75))
-        self.SearchBtn.setObjectName("SearchBtn")
+        self.Top10SearchBtn = QtWidgets.QPushButton(Dialog)
+        self.Top10SearchBtn.setGeometry(QtCore.QRect(352, 430, 75, 75))
+        self.Top10SearchBtn.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ui\\images/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.Top10SearchBtn.setIcon(icon2)
+        self.Top10SearchBtn.setIconSize(QtCore.QSize(48, 48))
+        self.Top10SearchBtn.setObjectName("Top10SearchBtn")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -78,4 +83,3 @@ class Ui_Dialog(object):
         self.genreBox.setItemText(3, _translate("Dialog", "Biography"))
         self.genreBox.setItemText(4, _translate("Dialog", "Suspense"))
         self.genreBox.setItemText(5, _translate("Dialog", "Thriller"))
-        self.SearchBtn.setText(_translate("Dialog", "Find a Book!"))

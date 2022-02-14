@@ -47,6 +47,9 @@ class Ui_Dialog(object):
         self.Top10HelpBtn.setIcon(icon1)
         self.Top10HelpBtn.setIconSize(QtCore.QSize(48, 48))
         self.Top10HelpBtn.setObjectName("Top10HelpBtn")
+        self.Top10BookBtn = QtWidgets.QPushButton(Dialog)
+        self.Top10BookBtn.setGeometry(QtCore.QRect(362, 230, 75, 23))
+        self.Top10BookBtn.setObjectName("Top10BookBtn")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -59,3 +62,4 @@ class Ui_Dialog(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Top 10</span></p></body></html>"))
+        self.Top10BookBtn.setText(_translate("Dialog", "Book"))

@@ -145,7 +145,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="Top10SearchBtn">
    <property name="geometry">
     <rect>
-     <x>352</x>
+     <x>362</x>
      <y>430</y>
      <width>75</width>
      <height>75</height>

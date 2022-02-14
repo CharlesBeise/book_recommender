@@ -53,7 +53,7 @@ class Ui_Dialog(object):
         self.genreBox.addItem("")
         self.genreBox.addItem("")
         self.Top10SearchBtn = QtWidgets.QPushButton(Dialog)
-        self.Top10SearchBtn.setGeometry(QtCore.QRect(352, 430, 75, 75))
+        self.Top10SearchBtn.setGeometry(QtCore.QRect(362, 430, 75, 75))
         self.Top10SearchBtn.setText("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("ui\\images/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)

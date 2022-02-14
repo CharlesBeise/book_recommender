@@ -13,6 +13,8 @@ from similar_result import Ui_Dialog as SR_Dialog
 from top_10 import Ui_Dialog as T_10_Dialog
 from top_10_result import Ui_Dialog as T_10_R_Dialog
 
+import webbrowser
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """This is the main window of the program. From here you can navigate to multiple methods for
@@ -105,13 +107,8 @@ class BookDialog(QDialog, Book_Dialog):
         self.BookBuyBtn.clicked.connect(self.purchase)
 
     def purchase(self):
-        """Currently this button displays an alert, but will later take the user to the book's Amazon page where they
-        can buy the book."""
-        QMessageBox.about(
-            self,
-            "About this page",
-            "<p>This will call a teammate's microservice</p>",
-        )
+        """When the user clicks the button to purchase the book, this takes them to the Amazon page of the book."""
+        webbrowser.open('https://www.amazon.com/Way-Kings-Brandon-Sanderson/dp/0765365278')
 
     def about(self):
         """This displays an information alert when the user clicks the About button"""

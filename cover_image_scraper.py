@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin
 import os
 from tqdm import tqdm
 

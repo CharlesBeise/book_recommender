@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from cover_image_scraper import *
 
 
 class Ui_Dialog(object):
@@ -37,12 +38,15 @@ class Ui_Dialog(object):
         self.BookAuthorMsg = QtWidgets.QTextBrowser(Dialog)
         self.BookAuthorMsg.setGeometry(QtCore.QRect(275, 90, 250, 40))
         self.BookAuthorMsg.setObjectName("BookAuthorMsg")
+
+        # Sets the cover image of the book
         self.BookCoverImg = QtWidgets.QLabel(Dialog)
         self.BookCoverImg.setGeometry(QtCore.QRect(560, 160, 200, 300))
         self.BookCoverImg.setText("")
-        self.BookCoverImg.setPixmap(QtGui.QPixmap("ui\\images/TheWayofKings.jpg"))
-        self.BookCoverImg.setScaledContents(True)
-        self.BookCoverImg.setObjectName("BookCoverImg")
+        # self.BookCoverImg.setPixmap(QtGui.QPixmap("ui\\images/TheWayofKings.jpg"))
+        # self.BookCoverImg.setScaledContents(True)
+        # self.BookCoverImg.setObjectName("BookCoverImg")
+
         self.BookSummary = QtWidgets.QTextBrowser(Dialog)
         self.BookSummary.setGeometry(QtCore.QRect(20, 160, 480, 410))
         self.BookSummary.setObjectName("BookSummary")

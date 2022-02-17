@@ -68,7 +68,7 @@
   <widget class="QTextBrowser" name="PageTitleMsg">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>300</x>
      <y>155</y>
      <width>200</width>
      <height>40</height>
@@ -85,7 +85,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>310</x>
      <y>265</y>
      <width>180</width>
      <height>30</height>
@@ -105,7 +105,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QComboBox" name="genreBox">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>310</x>
      <y>330</y>
      <width>180</width>
      <height>30</height>

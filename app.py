@@ -1,6 +1,8 @@
 import sys
+import webbrowser
 
 from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QMessageBox
+from PyQt5 import QtGui
 
 from book_main_window import Ui_MainWindow
 
@@ -13,7 +15,7 @@ from similar_result import Ui_Dialog as SR_Dialog
 from top_10 import Ui_Dialog as T_10_Dialog
 from top_10_result import Ui_Dialog as T_10_R_Dialog
 
-import webbrowser
+from cover_image_scraper import get_cover
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -98,7 +100,17 @@ class BookDialog(QDialog, Book_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.setCoverImage()
         self.connectSignals()
+
+    def setCoverImage(self):
+        """This loads the cover image of the book into the image box"""
+        book = 'https://en.wikipedia.org/wiki/Mistborn:_The_Final_Empire'
+        cover = get_cover(book)
+        self.BookCoverImg.setPixmap(QtGui.QPixmap(cover))
+        self.BookCoverImg.setScaledContents(True)
+        self.BookCoverImg.setObjectName("BookCoverImg")
+
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""

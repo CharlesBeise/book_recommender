@@ -13,7 +13,7 @@ def find_cover(book):
     cover_image = cover.find('img').attrs.get('src')
     cover_image = urljoin(book, cover_image)
 
-    # This raises an error ir there are any query parameters after '.png'
+    # This raises an error if there are any query parameters after '.png'
     try:
         pos = cover_image.index("?")
         cover_image = cover_image[:pos]

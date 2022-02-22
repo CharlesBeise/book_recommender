@@ -3,12 +3,15 @@ import requests
 from urllib.parse import urljoin
 import os
 from tqdm import tqdm
+import wikipedia
 
 
 def find_cover(book):
     """This takes the wikipedia URL of a book and finds the cover image"""
     html_text = requests.get(book)
     soup = BeautifulSoup(html_text.content, 'lxml')
+    # 'infobox vcard' is the class name of the display box on wikipedia pages, so this ensures it pulls the image from
+    # this box, instead of a random image located elsewhere on the page
     cover = soup.find('table', class_='infobox vcard')
     cover_image = cover.find('img').attrs.get('src')
     cover_image = urljoin(book, cover_image)
@@ -41,13 +44,15 @@ def download_cover(book):
 
 def get_cover(book):
     """Calls the necessary functions to retrieve and save the cover image. Returns the file path to the cover image"""
-    return download_cover(find_cover(book))
+    page = wikipedia.page(book)
+    print(page.url)
+    return download_cover(find_cover(page.url))
 
 
 
 
 
 if __name__ == '__main__':
-    TWOK = 'https://en.wikipedia.org/wiki/The_Wise_Man%27s_Fear'
+    TWOK = 'the way of kings'
     book_cover = get_cover(TWOK)
     print(book_cover)

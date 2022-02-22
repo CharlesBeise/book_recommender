@@ -105,7 +105,8 @@ class BookDialog(QDialog, Book_Dialog):
 
     def setCoverImage(self):
         """This loads the cover image of the book into the image box"""
-        book = 'https://en.wikipedia.org/wiki/Mistborn:_The_Final_Empire'
+        book = 'snow crash'
+        book = book + ' book'
         cover = get_cover(book)
         self.BookCoverImg.setPixmap(QtGui.QPixmap(cover))
         self.BookCoverImg.setScaledContents(True)

@@ -16,6 +16,7 @@ from top_10 import Ui_Dialog as T_10_Dialog
 from top_10_result import Ui_Dialog as T_10_R_Dialog
 
 from cover_image_scraper import get_cover
+import time
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -105,9 +106,16 @@ class BookDialog(QDialog, Book_Dialog):
 
     def setCoverImage(self):
         """This loads the cover image of the book into the image box"""
-        book = 'snow crash'
-        book = book + ' book'
-        cover = get_cover(book)
+        book = 'where the wild things are'
+        with open('book_title.txt', 'w') as out_file:
+            out_file.write(book)
+        cover = ''
+        while cover == '':
+            with open('cover_image_path.txt', 'r') as in_file:
+                cover = in_file.read()
+        with open('cover_image_path.txt', 'w') as clear_file:
+            clear_file.write('')
+            clear_file.close()
         self.BookCoverImg.setPixmap(QtGui.QPixmap(cover))
         self.BookCoverImg.setScaledContents(True)
         self.BookCoverImg.setObjectName("BookCoverImg")

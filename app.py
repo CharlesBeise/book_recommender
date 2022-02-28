@@ -15,9 +15,6 @@ from similar_result import Ui_Dialog as SR_Dialog
 from top_10 import Ui_Dialog as T_10_Dialog
 from top_10_result import Ui_Dialog as T_10_R_Dialog
 
-from cover_image_scraper import get_cover
-import time
-
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     """This is the main window of the program. From here you can navigate to multiple methods for
@@ -106,7 +103,7 @@ class BookDialog(QDialog, Book_Dialog):
 
     def setCoverImage(self):
         """This loads the cover image of the book into the image box"""
-        book = 'where the wild things are'
+        book = 'the silence of the lambs'
         with open('book_title.txt', 'w') as out_file:
             out_file.write(book)
         cover = ''
@@ -129,7 +126,18 @@ class BookDialog(QDialog, Book_Dialog):
 
     def purchase(self):
         """When the user clicks the button to purchase the book, this takes them to the Amazon page of the book."""
-        webbrowser.open('https://www.amazon.com/Way-Kings-Brandon-Sanderson/dp/0765365278')
+        title = 'silence of the lambs'
+        with open('input.txt', 'w') as out_file:
+            out_file.write(title)
+            out_file.close()
+        book_url = ''
+        while book_url == '':
+            with open('output.txt', 'r') as title_file:
+                book_url = title_file.read()
+        webbrowser.open(book_url)
+        with open('output.txt', 'w') as clear_file:
+            clear_file.write('')
+            clear_file.close()
 
     def about(self):
         """This displays an information alert when the user clicks the About button"""

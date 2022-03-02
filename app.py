@@ -1,19 +1,22 @@
 import sys
 import webbrowser
+import json
 
-from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QMessageBox, QCompleter
 from PyQt5 import QtGui
 
-from book_main_window import Ui_MainWindow
+from gui_py_files.book_main_window import Ui_MainWindow
 
-from author_page import Ui_Dialog as A_Dialog
-from book_page import Ui_Dialog as Book_Dialog
-from search_author_page import Ui_Dialog as SA_Dialog
-from search_author_result import Ui_Dialog as AR_Dialog
-from search_similar_page import Ui_Dialog as S_Dialog
-from similar_result import Ui_Dialog as SR_Dialog
-from top_10 import Ui_Dialog as T_10_Dialog
-from top_10_result import Ui_Dialog as T_10_R_Dialog
+from gui_py_files.author_page import Ui_Dialog as A_Dialog
+from gui_py_files.book_page import Ui_Dialog as Book_Dialog
+from gui_py_files.search_author_page import Ui_Dialog as SA_Dialog
+from gui_py_files.search_author_result import Ui_Dialog as AR_Dialog
+from gui_py_files.search_similar_page import Ui_Dialog as S_Dialog
+from gui_py_files.similar_result import Ui_Dialog as SR_Dialog
+from gui_py_files.top_10 import Ui_Dialog as T_10_Dialog
+from gui_py_files.top_10_result import Ui_Dialog as T_10_R_Dialog
+
+from cover_image_scraper import get_cover
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -98,25 +101,24 @@ class BookDialog(QDialog, Book_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.book = {'title': 'shutter island'}
         self.setCoverImage()
         self.connectSignals()
 
     def setCoverImage(self):
         """This loads the cover image of the book into the image box"""
-        book = 'the silence of the lambs'
-        with open('book_title.txt', 'w') as out_file:
-            out_file.write(book)
-        cover = ''
-        while cover == '':
-            with open('cover_image_path.txt', 'r') as in_file:
-                cover = in_file.read()
-        with open('cover_image_path.txt', 'w') as clear_file:
-            clear_file.write('')
-            clear_file.close()
-        self.BookCoverImg.setPixmap(QtGui.QPixmap(cover))
+        # with open('book_title.txt', 'w') as out_file:
+        #     out_file.write(book)
+        # cover = ''
+        # while cover == '':
+        #     with open('cover_image_path.txt', 'r') as in_file:
+        #         cover = in_file.read()
+        # with open('cover_image_path.txt', 'w') as clear_file:
+        #     clear_file.write('')
+        #     clear_file.close()
+        self.BookCoverImg.setPixmap(QtGui.QPixmap(get_cover(self.book['title'])))
         self.BookCoverImg.setScaledContents(True)
         self.BookCoverImg.setObjectName("BookCoverImg")
-
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""
@@ -126,9 +128,8 @@ class BookDialog(QDialog, Book_Dialog):
 
     def purchase(self):
         """When the user clicks the button to purchase the book, this takes them to the Amazon page of the book."""
-        title = 'silence of the lambs'
         with open('input.txt', 'w') as out_file:
-            out_file.write(title)
+            out_file.write(self.book['title'])
             out_file.close()
         book_url = ''
         while book_url == '':
@@ -303,6 +304,11 @@ class Top10Dialog(QDialog, T_10_Dialog):
         super().__init__(parent)
         self.setupUi(self)
         self.connectSignals()
+        file = open('book_data/updated_genre_list_ranked.json')
+        books = json.load(file)
+        genres = books.keys()
+        completer = QCompleter(genres)
+        self.genreBox.setCompleter(completer)
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""
@@ -313,7 +319,7 @@ class Top10Dialog(QDialog, T_10_Dialog):
     def top10Search(self):
         """When the user clicks the search button this loads a Top10Result dialog and passes the genre the user
         selected as a parameter."""
-        genre = self.genreBox.currentText()
+        genre = self.genreBox.text()
         t_10_l_dialog = Top10Result(genre, self)
         t_10_l_dialog.exec()
 
@@ -333,19 +339,49 @@ class Top10Result(QDialog, T_10_R_Dialog):
         super().__init__(parent)
         self.setupUi(self)
         self.genre = genre
-        self.connectSignals()
+        file = open('book_data/updated_genre_list_ranked.json')
+        book_dict = json.load(file)
+        self.selection = book_dict[genre]
         self.GenreDisplayBox.setText(self.genre)
+        self.populateBoxes()
+        self.connectSignals()
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""
         self.Top10BackBtn.clicked.connect(self.reject)
         self.Top10HelpBtn.clicked.connect(self.about)
-        self.Top10BookBtn.clicked.connect(self.book_page)
+        self.Book1.clicked.connect(self.book_page(self.selection[0]))
+        # self.Book2.clicked.connect(self.book_page(self.selection[1]))
+        # self.Book3.clicked.connect(self.book_page(self.selection[2]))
+        # self.Book4.clicked.connect(self.book_page(self.selection[3]))
+        # self.Book5.clicked.connect(self.book_page(self.selection[4]))
+        # self.Book6.clicked.connect(self.book_page(self.selection[5]))
+        # self.Book7.clicked.connect(self.book_page(self.selection[6]))
+        # self.Book8.clicked.connect(self.book_page(self.selection[7]))
+        # self.Book9.clicked.connect(self.book_page(self.selection[8]))
+        # self.Book_10.clicked.connect(self.book_page(self.selection[9]))
 
-    def book_page(self):
+
+    def populateBoxes(self):
+        """This fills the 10 buttons with information for the top 10 books in the entered genre"""
+        pairs = []
+        for book in self.selection:
+            pairs.append([book['title'], book['author']])
+        self.Book1.setText(f'{pairs[0][0]} \n by {pairs[0][1]}')
+        self.Book2.setText(f'{pairs[1][0]} \n by {pairs[1][1]}')
+        self.Book3.setText(f'{pairs[2][0]} \n by {pairs[2][1]}')
+        self.Book4.setText(f'{pairs[3][0]} \n by {pairs[3][1]}')
+        self.Book5.setText(f'{pairs[4][0]} \n by {pairs[4][1]}')
+        self.Book6.setText(f'{pairs[5][0]} \n by {pairs[5][1]}')
+        self.Book7.setText(f'{pairs[6][0]} \n by {pairs[6][1]}')
+        self.Book8.setText(f'{pairs[7][0]} \n by {pairs[7][1]}')
+        self.Book9.setText(f'{pairs[8][0]} \n by {pairs[8][1]}')
+        self.Book_10.setText(f'{pairs[9][0]} \n by {pairs[9][1]}')
+
+    def book_page(self, book):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
         any parameters, but this will change in future versions."""
-        book_dialog = BookDialog(self)
+        book_dialog = BookDialog(self, book)
         book_dialog.exec()
 
     def about(self):

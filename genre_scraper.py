@@ -42,16 +42,16 @@ def find_genre(name, title):
     return top_genres
 
 
-
-
-
-books_df = pd.read_csv("book_data/books.csv")
+books_df = pd.read_csv("book_data/updated_books_final_3.csv")
 
 rows, columns = books_df.shape
 
 genres = []
 
-for i in range(7000, 8000):
+for i in range(250, rows):
+    checker = books_df['primary_genre'][i]
+    if type(checker) == str:
+        continue
     book = books_df.values[i]
     book_id = str(book[1])
     book_title = str(book[3]).split('(')[0]
@@ -71,12 +71,12 @@ for i in range(7000, 8000):
 
     genres = []
 
-books_df.to_csv("book_data/updated_books_7.csv", index=False)
+books_df.to_csv("book_data/updated_books_final.csv", index=False)
 
 end = timeit.default_timer()
 time = end - start
 print("Total time:", time, "seconds, or", time/60, "minutes.")
-send_msg('done')
+# send_msg('done')
 
 # Range: 5      Seconds: 18     Minutes: 0.3    Errors: None
 # Range: 10     Seconds: 43     Minutes: 0.7    Errors: 11870085
@@ -97,3 +97,6 @@ send_msg('done')
 # Range: 1000   Seconds: 4396   Minutes: 73.2
 # Range: 1000   Seconds: 4442   Minutes: 74.0
 # Range: 1000   Seconds: 4182   Minutes: 69.7
+# Range: 1000   Seconds: 4072   Minutes: 67.9
+# Range: 1000   Seconds: 4213   Minutes: 70.2
+# Range: 1000   Seconds: 4137   Minutes: 68.9

@@ -1,6 +1,7 @@
 import sys
 import webbrowser
 import json
+import wikipedia
 
 from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QMessageBox, QCompleter
 from PyQt5 import QtGui
@@ -17,6 +18,7 @@ from gui_py_files.top_10 import Ui_Dialog as T_10_Dialog
 from gui_py_files.top_10_result import Ui_Dialog as T_10_R_Dialog
 
 from cover_image_scraper import get_cover
+from goodreads_scraper import find_book
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -78,6 +80,9 @@ class AuthorDialog(QDialog, A_Dialog):
 
     def book_page(self):
         """If a user selects a book from the list, this loads a BookDialog."""
+        book = 'alice in wonderland'
+        with open('book_title.txt', 'w') as out_file:
+            out_file.write(book)
         book_dialog = BookDialog(self)
         book_dialog.exec()
 
@@ -98,25 +103,26 @@ class BookDialog(QDialog, Book_Dialog):
     a button in the bottom right corner of the screen that will eventually bring the user to the book's Amazon page
     where they can buy the book. Currently this page does not take any parameters, but that will change in future
     versions."""
-    def __init__(self, parent=None):
+    def __init__(self, book, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.book = {'title': 'shutter island'}
-        self.setCoverImage()
+        self.book = book
+        self.loadpage()
         self.connectSignals()
 
-    def setCoverImage(self):
+    def loadpage(self):
+        """This loads the page elements"""
+        cover, description = find_book(str(self.book['book_id']))
+        title = "<b><p style='font-size: 15px'>" + self.book['title'].split('(')[0] + "</p></b>"
+        author = "<b><p style='font-size: 15px'>By " + self.book['author'] + "</p></b>"
+        self.BookTitleMsg.setText(title)
+        self.BookAuthorMsg.setText(author)
+        self.BookSummary.setText(description)
+        self.setCoverImage(cover)
+
+    def setCoverImage(self, image):
         """This loads the cover image of the book into the image box"""
-        # with open('book_title.txt', 'w') as out_file:
-        #     out_file.write(book)
-        # cover = ''
-        # while cover == '':
-        #     with open('cover_image_path.txt', 'r') as in_file:
-        #         cover = in_file.read()
-        # with open('cover_image_path.txt', 'w') as clear_file:
-        #     clear_file.write('')
-        #     clear_file.close()
-        self.BookCoverImg.setPixmap(QtGui.QPixmap(get_cover(self.book['title'])))
+        self.BookCoverImg.setPixmap(QtGui.QPixmap(image))
         self.BookCoverImg.setScaledContents(True)
         self.BookCoverImg.setObjectName("BookCoverImg")
 
@@ -283,6 +289,9 @@ class SimilarResult(QDialog, SR_Dialog):
     def book_page(self):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
         any parameters, but this will change in future versions."""
+        book = 'where the sidewalk ends'
+        with open('book_title.txt', 'w') as out_file:
+            out_file.write(book)
         book_dialog = BookDialog(self)
         book_dialog.exec()
 
@@ -350,38 +359,45 @@ class Top10Result(QDialog, T_10_R_Dialog):
         """Here are the clickable buttons on the page"""
         self.Top10BackBtn.clicked.connect(self.reject)
         self.Top10HelpBtn.clicked.connect(self.about)
-        self.Book1.clicked.connect(self.book_page(self.selection[0]))
-        # self.Book2.clicked.connect(self.book_page(self.selection[1]))
-        # self.Book3.clicked.connect(self.book_page(self.selection[2]))
-        # self.Book4.clicked.connect(self.book_page(self.selection[3]))
-        # self.Book5.clicked.connect(self.book_page(self.selection[4]))
-        # self.Book6.clicked.connect(self.book_page(self.selection[5]))
-        # self.Book7.clicked.connect(self.book_page(self.selection[6]))
-        # self.Book8.clicked.connect(self.book_page(self.selection[7]))
-        # self.Book9.clicked.connect(self.book_page(self.selection[8]))
-        # self.Book_10.clicked.connect(self.book_page(self.selection[9]))
+        self.Book1.clicked.connect(lambda: self.load_book_page(0))
+        self.Book2.clicked.connect(lambda: self.load_book_page(1))
+        self.Book3.clicked.connect(lambda: self.load_book_page(2))
+        self.Book4.clicked.connect(lambda: self.load_book_page(3))
+        self.Book5.clicked.connect(lambda: self.load_book_page(4))
+        self.Book6.clicked.connect(lambda: self.load_book_page(5))
+        self.Book7.clicked.connect(lambda: self.load_book_page(6))
+        self.Book8.clicked.connect(lambda: self.load_book_page(7))
+        self.Book9.clicked.connect(lambda: self.load_book_page(8))
+        self.Book_10.clicked.connect(lambda: self.load_book_page(9))
 
 
     def populateBoxes(self):
         """This fills the 10 buttons with information for the top 10 books in the entered genre"""
         pairs = []
         for book in self.selection:
-            pairs.append([book['title'], book['author']])
-        self.Book1.setText(f'{pairs[0][0]} \n by {pairs[0][1]}')
-        self.Book2.setText(f'{pairs[1][0]} \n by {pairs[1][1]}')
-        self.Book3.setText(f'{pairs[2][0]} \n by {pairs[2][1]}')
-        self.Book4.setText(f'{pairs[3][0]} \n by {pairs[3][1]}')
-        self.Book5.setText(f'{pairs[4][0]} \n by {pairs[4][1]}')
-        self.Book6.setText(f'{pairs[5][0]} \n by {pairs[5][1]}')
-        self.Book7.setText(f'{pairs[6][0]} \n by {pairs[6][1]}')
-        self.Book8.setText(f'{pairs[7][0]} \n by {pairs[7][1]}')
-        self.Book9.setText(f'{pairs[8][0]} \n by {pairs[8][1]}')
-        self.Book_10.setText(f'{pairs[9][0]} \n by {pairs[9][1]}')
+            title = book['title']
+            if len(title) > 50:
+                title = title.split('(')[0]
+            pairs.append([title, book['author']])
+        # buttonList = ['Book1', 'Book2', 'Book3', 'Book4', 'Book5', 'Book6', 'Book7', 'Book8', 'Book9', 'Book_10']
+        # for i in range(len(buttonList)):
+        #     self.buttonList[i].setText(f'{pairs[i][0]} \n by {pairs[i][1]}')
+        self.Book1.setText(f'1. {pairs[0][0]} \n by {pairs[0][1]}')
+        self.Book2.setText(f'2. {pairs[1][0]} \n by {pairs[1][1]}')
+        self.Book3.setText(f'3. {pairs[2][0]} \n by {pairs[2][1]}')
+        self.Book4.setText(f'4. {pairs[3][0]} \n by {pairs[3][1]}')
+        self.Book5.setText(f'5. {pairs[4][0]} \n by {pairs[4][1]}')
+        self.Book6.setText(f'6. {pairs[5][0]} \n by {pairs[5][1]}')
+        self.Book7.setText(f'7. {pairs[6][0]} \n by {pairs[6][1]}')
+        self.Book8.setText(f'8. {pairs[7][0]} \n by {pairs[7][1]}')
+        self.Book9.setText(f'9. {pairs[8][0]} \n by {pairs[8][1]}')
+        self.Book_10.setText(f'10. {pairs[9][0]} \n by {pairs[9][1]}')
 
-    def book_page(self, book):
+    def load_book_page(self, pick):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
         any parameters, but this will change in future versions."""
-        book_dialog = BookDialog(self, book)
+        book = self.selection[pick]
+        book_dialog = BookDialog(book)
         book_dialog.exec()
 
     def about(self):

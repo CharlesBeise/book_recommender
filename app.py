@@ -1,23 +1,20 @@
 import sys
 import webbrowser
 import json
-import wikipedia
 
 from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QMessageBox, QCompleter
 from PyQt5 import QtGui
 
 from gui_py_files.book_main_window import Ui_MainWindow
-
-from gui_py_files.author_page import Ui_Dialog as A_Dialog
 from gui_py_files.book_page import Ui_Dialog as Book_Dialog
 from gui_py_files.search_author_page import Ui_Dialog as SA_Dialog
-from gui_py_files.search_author_result import Ui_Dialog as AR_Dialog
+from gui_py_files.author_result import Ui_Dialog as AR_Dialog
 from gui_py_files.search_similar_page import Ui_Dialog as S_Dialog
 from gui_py_files.similar_result import Ui_Dialog as SR_Dialog
 from gui_py_files.top_10 import Ui_Dialog as T_10_Dialog
 from gui_py_files.top_10_result import Ui_Dialog as T_10_R_Dialog
 
-from cover_image_scraper import get_cover
+
 from goodreads_scraper import find_book
 
 
@@ -33,15 +30,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """Here are the clickable buttons on the page"""
         self.HomeHelpButton.clicked.connect(self.about)
         self.Top10Btn.clicked.connect(self.top10)
-        self.SimilarBtn.clicked.connect(self.search_similar)
-        self.AuthorBtn.clicked.connect(self.search_author)
+        self.SimilarBtn.clicked.connect(self.searchSimilar)
+        self.AuthorBtn.clicked.connect(self.searchAuthor)
 
-    def search_author(self):
+    def searchAuthor(self):
         """If a user wishes to search by author, this will load a SearchAuthorDialog"""
         author_dialog = SearchAuthorDialog(self)
         author_dialog.exec()
 
-    def search_similar(self):
+    def searchSimilar(self):
         """If a user wishes to search by similar books, this will load a SearchSimilarDialog"""
         search_dialog = SearchSimilarDialog(self)
         search_dialog.exec()
@@ -60,40 +57,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             "<p>There are three ways you can find book recommendations:</p>"
             "<p>1) View the top 10 books by any given genre.</p>"
             "<p>2) Enter the title of a book to find similar books.</p>"
-            "<p>3) Enter the name of an author to find similar authors.</p>"
+            "<p>3) View the top 10 books by any given author.</p>"
             "<p>Enjoy!</p>",
-        )
-
-
-class AuthorDialog(QDialog, A_Dialog):
-    """This page displays an author and a list of their books. Currently this does not take any input parameters."""
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setupUi(self)
-        self.connectSignals()
-
-    def connectSignals(self):
-        """Here are the clickable buttons on the page"""
-        self.AuthorHelpBtn.clicked.connect(self.about)
-        self.AuthorBackBtn.clicked.connect(self.reject)
-        self.AuthorBookBtn.clicked.connect(self.book_page)
-
-    def book_page(self):
-        """If a user selects a book from the list, this loads a BookDialog."""
-        book = 'alice in wonderland'
-        with open('book_title.txt', 'w') as out_file:
-            out_file.write(book)
-        book_dialog = BookDialog(self)
-        book_dialog.exec()
-
-    def about(self):
-        """This displays an information alert when the user clicks the About button"""
-        QMessageBox.about(
-            self,
-            "About this page",
-            "<p>Here is an author and their most popular books.</p>"
-            "<p></p>"
-            "<p>Click on a book to get more information about it!</p>",
         )
 
 
@@ -113,8 +78,8 @@ class BookDialog(QDialog, Book_Dialog):
     def loadpage(self):
         """This loads the page elements"""
         cover, description = find_book(str(self.book['book_id']))
-        title = "<b><p style='font-size: 15px'>" + self.book['title'].split('(')[0] + "</p></b>"
-        author = "<b><p style='font-size: 15px'>By " + self.book['author'] + "</p></b>"
+        title = "<b><center><p style='font-size: 15px'>" + self.book['title'].split('(')[0] + "</p></center></b>"
+        author = "<b><center><p style='font-size: 15px'>By " + self.book['author'] + "</p></center></b>"
         self.BookTitleMsg.setText(title)
         self.BookAuthorMsg.setText(author)
         self.BookSummary.setText(description)
@@ -163,6 +128,11 @@ class SearchAuthorDialog(QDialog, SA_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        file = open('book_data/author_ranked.json')
+        books = json.load(file)
+        authors = books.keys()
+        completer = QCompleter(authors)
+        self.AuthorSearchBox.setCompleter(completer)
         self.connectAuthorSignals()
 
     def connectAuthorSignals(self):
@@ -193,7 +163,7 @@ class SearchAuthorDialog(QDialog, SA_Dialog):
             "About this page",
             "<p>Type the name of an author in the box and click the search icon.</p>"
             "<p></p>"
-            "<p>Then I will show you authors similar to the author you entered!</p>",
+            "<p>Then I will show you the best books by that author!</p>",
         )
 
 
@@ -203,29 +173,74 @@ class SearchAuthorResult(QDialog, AR_Dialog):
     def __init__(self, author, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.author = author
         # The name of the author the user searched is entered into this box
-        self.ARUserAuthor.setText(author)
+        name = "<b><center><p style='font-size: 20px'>" + self.author + "</p></center></b>"
+        self.ARUserAuthor.setText(name)
+        file = open('book_data/author_ranked.json')
+        book_dict = json.load(file)
+        self.selection = book_dict[self.author]
+        self.populateBoxes()
         self.connectSignals()
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""
         self.ARBackBtn.clicked.connect(self.reject)
         self.ARHelpBtn.clicked.connect(self.about)
-        self.ARAuthorBtn.clicked.connect(self.author)
+        self.Book1.clicked.connect(lambda: self.loadBookPage(0))
+        self.Book2.clicked.connect(lambda: self.loadBookPage(1))
+        self.Book3.clicked.connect(lambda: self.loadBookPage(2))
+        self.Book4.clicked.connect(lambda: self.loadBookPage(3))
+        self.Book5.clicked.connect(lambda: self.loadBookPage(4))
+        self.Book6.clicked.connect(lambda: self.loadBookPage(5))
+        self.Book7.clicked.connect(lambda: self.loadBookPage(6))
+        self.Book8.clicked.connect(lambda: self.loadBookPage(7))
+        self.Book9.clicked.connect(lambda: self.loadBookPage(8))
+        self.Book_10.clicked.connect(lambda: self.loadBookPage(9))
 
-    def author(self):
-        """When the user selects an author, this loads an Author dialog with that author's information"""
-        author_dialog = AuthorDialog(self)
-        author_dialog.exec()
+    def populateBoxes(self):
+        """This fills the 10 buttons with information for the top 10 books in the entered genre"""
+        book_list = []
+        for book in self.selection:
+            title = book['title']
+            if len(title) > 50:
+                title = title.split('(')[0]
+            book_list.append(title)
+        while len(book_list) < 10:
+            book_list.append(f"Sorry, I couldn't find 10 books by {self.author}")
+        self.Book1.setText(f'1. {book_list[0]}')
+        self.Book2.setText(f'2. {book_list[1]}')
+        self.Book3.setText(f'3. {book_list[2]}')
+        self.Book4.setText(f'4. {book_list[3]}')
+        self.Book5.setText(f'5. {book_list[4]}')
+        self.Book6.setText(f'6. {book_list[5]}')
+        self.Book7.setText(f'7. {book_list[6]}')
+        self.Book8.setText(f'8. {book_list[7]}')
+        self.Book9.setText(f'9. {book_list[8]}')
+        self.Book_10.setText(f'10. {book_list[9]}')
+
+    def loadBookPage(self, pick):
+        """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
+        any parameters, but this will change in future versions."""
+        if pick >= len(self.selection):
+            QMessageBox.about(
+                self,
+                "Oops!",
+                "<p>Please select a valid book.</p>"
+            )
+        else:
+            book = self.selection[pick]
+            book_dialog = BookDialog(book)
+            book_dialog.exec()
 
     def about(self):
         """This displays an information alert when the user clicks the About button"""
         QMessageBox.about(
             self,
             "About this page",
-            "<p>Here we have listed some authors you may enjoy, based on the author you entered.</p>"
+            "<p>Here is an author and their most popular books.</p>"
             "<p></p>"
-            "<p>Click on an author to get more information about them!</p>",
+            "<p>Click on a book to get more information about it!</p>",
         )
 
 
@@ -277,22 +292,53 @@ class SimilarResult(QDialog, SR_Dialog):
         super().__init__(parent)
         self.setupUi(self)
         self.title = title
+        # The title of the book the user searched is entered into the ARUserAuthor box
+        book_name = "<b><center><p style='font-size: 20px'>" + self.title + "</p></center></b>"
+        file = open('book_data/author_ranked.json')
+        book_dict = json.load(file)
+        self.selection = book_dict[self.author]
+        self.populateBoxes()
         self.connectSignals()
-        self.SRUserBook.setText(self.title)
+        self.SRUserBook.setText(book_name)
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""
         self.SRBackBtn.clicked.connect(self.reject)
         self.SRHelpBtn.clicked.connect(self.about)
-        self.SRBookBtn.clicked.connect(self.book_page)
+        self.Book1.clicked.connect(lambda: self.loadBookPage(0))
+        self.Book2.clicked.connect(lambda: self.loadBookPage(1))
+        self.Book3.clicked.connect(lambda: self.loadBookPage(2))
+        self.Book4.clicked.connect(lambda: self.loadBookPage(3))
+        self.Book5.clicked.connect(lambda: self.loadBookPage(4))
+        self.Book6.clicked.connect(lambda: self.loadBookPage(5))
+        self.Book7.clicked.connect(lambda: self.loadBookPage(6))
+        self.Book8.clicked.connect(lambda: self.loadBookPage(7))
+        self.Book9.clicked.connect(lambda: self.loadBookPage(8))
+        self.Book_10.clicked.connect(lambda: self.loadBookPage(9))
 
-    def book_page(self):
+    def populateBoxes(self):
+        pairs = []
+        for book in self.selection:
+            title = book['title']
+            if len(title) > 50:
+                title = title.split('(')[0]
+            pairs.append([title, book['author']])
+        self.Book1.setText(f'1. {pairs[0][0]} \n by {pairs[0][1]}')
+        self.Book2.setText(f'2. {pairs[1][0]} \n by {pairs[1][1]}')
+        self.Book3.setText(f'3. {pairs[2][0]} \n by {pairs[2][1]}')
+        self.Book4.setText(f'4. {pairs[3][0]} \n by {pairs[3][1]}')
+        self.Book5.setText(f'5. {pairs[4][0]} \n by {pairs[4][1]}')
+        self.Book6.setText(f'6. {pairs[5][0]} \n by {pairs[5][1]}')
+        self.Book7.setText(f'7. {pairs[6][0]} \n by {pairs[6][1]}')
+        self.Book8.setText(f'8. {pairs[7][0]} \n by {pairs[7][1]}')
+        self.Book9.setText(f'9. {pairs[8][0]} \n by {pairs[8][1]}')
+        self.Book_10.setText(f'10. {pairs[9][0]} \n by {pairs[9][1]}')
+
+    def loadBookPage(self, pick):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
         any parameters, but this will change in future versions."""
-        book = 'where the sidewalk ends'
-        with open('book_title.txt', 'w') as out_file:
-            out_file.write(book)
-        book_dialog = BookDialog(self)
+        book = self.selection[pick]
+        book_dialog = BookDialog(book)
         book_dialog.exec()
 
     def about(self):
@@ -347,7 +393,7 @@ class Top10Result(QDialog, T_10_R_Dialog):
     def __init__(self, genre, parent):
         super().__init__(parent)
         self.setupUi(self)
-        self.genre = genre
+        self.genre = "<b><center><p style='font-size: 30px'>" + genre + "</p></center></b>"
         file = open('book_data/updated_genre_list_ranked.json')
         book_dict = json.load(file)
         self.selection = book_dict[genre]
@@ -359,16 +405,16 @@ class Top10Result(QDialog, T_10_R_Dialog):
         """Here are the clickable buttons on the page"""
         self.Top10BackBtn.clicked.connect(self.reject)
         self.Top10HelpBtn.clicked.connect(self.about)
-        self.Book1.clicked.connect(lambda: self.load_book_page(0))
-        self.Book2.clicked.connect(lambda: self.load_book_page(1))
-        self.Book3.clicked.connect(lambda: self.load_book_page(2))
-        self.Book4.clicked.connect(lambda: self.load_book_page(3))
-        self.Book5.clicked.connect(lambda: self.load_book_page(4))
-        self.Book6.clicked.connect(lambda: self.load_book_page(5))
-        self.Book7.clicked.connect(lambda: self.load_book_page(6))
-        self.Book8.clicked.connect(lambda: self.load_book_page(7))
-        self.Book9.clicked.connect(lambda: self.load_book_page(8))
-        self.Book_10.clicked.connect(lambda: self.load_book_page(9))
+        self.Book1.clicked.connect(lambda: self.loadBookPage(0))
+        self.Book2.clicked.connect(lambda: self.loadBookPage(1))
+        self.Book3.clicked.connect(lambda: self.loadBookPage(2))
+        self.Book4.clicked.connect(lambda: self.loadBookPage(3))
+        self.Book5.clicked.connect(lambda: self.loadBookPage(4))
+        self.Book6.clicked.connect(lambda: self.loadBookPage(5))
+        self.Book7.clicked.connect(lambda: self.loadBookPage(6))
+        self.Book8.clicked.connect(lambda: self.loadBookPage(7))
+        self.Book9.clicked.connect(lambda: self.loadBookPage(8))
+        self.Book_10.clicked.connect(lambda: self.loadBookPage(9))
 
 
     def populateBoxes(self):
@@ -379,9 +425,6 @@ class Top10Result(QDialog, T_10_R_Dialog):
             if len(title) > 50:
                 title = title.split('(')[0]
             pairs.append([title, book['author']])
-        # buttonList = ['Book1', 'Book2', 'Book3', 'Book4', 'Book5', 'Book6', 'Book7', 'Book8', 'Book9', 'Book_10']
-        # for i in range(len(buttonList)):
-        #     self.buttonList[i].setText(f'{pairs[i][0]} \n by {pairs[i][1]}')
         self.Book1.setText(f'1. {pairs[0][0]} \n by {pairs[0][1]}')
         self.Book2.setText(f'2. {pairs[1][0]} \n by {pairs[1][1]}')
         self.Book3.setText(f'3. {pairs[2][0]} \n by {pairs[2][1]}')
@@ -393,7 +436,7 @@ class Top10Result(QDialog, T_10_R_Dialog):
         self.Book9.setText(f'9. {pairs[8][0]} \n by {pairs[8][1]}')
         self.Book_10.setText(f'10. {pairs[9][0]} \n by {pairs[9][1]}')
 
-    def load_book_page(self, pick):
+    def loadBookPage(self, pick):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
         any parameters, but this will change in future versions."""
         book = self.selection[pick]

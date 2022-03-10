@@ -10,6 +10,47 @@ import json
 # pd.options.display.max_rows = None
 pd.options.mode.chained_assignment = None
 
+
+def myFunc(a):
+    return a['rating']
+
+
+author_books = pd.read_csv("book_data/updated_books_final.csv")
+
+
+def make_top_10(a_entry, a_dict):
+    author = a_entry['author']
+    if a_dict.get(author):
+        if len(a_dict[author]) < 10:
+            a_dict[author].append(a_entry)
+            a_dict[author].sort(reverse=True, key=myFunc)
+        elif a_dict[author][9]['rating'] < a_entry['rating']:
+            a_dict[author][9] = a_entry
+            a_dict[author].sort(reverse=True, key=myFunc)
+    else:
+        a_dict[author] = [a_entry]
+
+
+def author_top_10():
+    author_dict = {}
+    for i in range(author_books.shape[0]):
+        book = {'book_id': int(author_books['book_id'][i]),
+                'author': author_books['author'][i],
+                'title': author_books['title'][i],
+                'rating': float(author_books['average_rating'][i]),
+                'votes': int(author_books['ratings_count'][i]),
+                'primary': author_books['primary_genre'][i],
+                'secondary': author_books['secondary_genre'][i],
+                'tertiary': author_books['tertiary_genre'][i]}
+        make_top_10(book, author_dict)
+
+    with open('book_data/author_ranked.json', 'w') as outfile:
+        json.dump(author_dict, outfile)
+        outfile.close()
+
+
+author_top_10()
+
 # Creates a DataFrame object
 # books_df = pd.read_csv("book_data/books.csv")
 # book_tags_df = pd.read_csv("book_data/book_tags.csv")
@@ -88,10 +129,6 @@ pd.options.mode.chained_assignment = None
 #     for key, value in book_tag_dict.items():
 #         dict_writer.writerow([key, value])
 #     updated_tag_file.close()
-
-def myFunc(a):
-    return a['rating']
-
 
 def entry(b, genre_dict):
     rank_list = ['primary', 'secondary', 'tertiary']

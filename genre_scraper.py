@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import timeit
-from sms_service import send_msg
 
 pd.options.mode.chained_assignment = None
 

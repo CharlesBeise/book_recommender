@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from cover_image_scraper import *
 
 
 class Ui_Dialog(object):

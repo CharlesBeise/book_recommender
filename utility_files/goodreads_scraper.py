@@ -2,6 +2,7 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from urllib.request import Request,urlopen
 import os
 from tqdm import tqdm
 import re
@@ -10,14 +11,14 @@ import re
 def get_page(book_id):
     default_url = "https://www.goodreads.com/book/show/"
 
-    # headers = {
-    #     "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-    #                   'Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56'}
+    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                             'Chrome/98.0.4758.102 Safari/537.36 Edg/98.0.1108.56'}
 
     url = default_url + book_id
 
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'lxml')
+    page = Request(url, headers=headers)
+    webpage = urlopen(page).read()
+    soup = BeautifulSoup(webpage, 'lxml')
 
     return soup
 

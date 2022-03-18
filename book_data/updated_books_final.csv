@@ -736,7 +736,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 737,43015,Ishmael Beah,A Long Way Gone: Memoirs of a Boy Soldier,4.14,116260,Nonfiction,Autobiography,Memoir
 738,9822,Robert C. O'Brien,"Mrs. Frisby and the Rats of NIMH (Rats of NIMH, #1)",4.13,135978,Fantasy,Fiction,Childrens
 739,39662,Stephen King,Different Seasons,4.34,105961,Horror,Fiction,Short Stories
-740,114345,Laura Ingalls Wilder,"The Little House Collection (Little House, #1-9)",4.33,124320,Classics,Historical,Historical Fiction
 741,33926,Melissa Bank,The Girls' Guide to Hunting and Fishing,3.29,113977,Fiction,Womens Fiction,Chick Lit
 742,13453029,Hugh Howey,"Wool Omnibus (Silo, #1)",4.24,81982,Science Fiction,Fiction,Science Fiction
 743,28881,Christopher Moore,"Lamb: The Gospel According to Biff, Christ's Childhood Pal",4.26,118576,Fiction,Humor,Historical
@@ -1488,7 +1487,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 1493,130580,Fred Gipson,"Old Yeller (Old Yeller, #1)",4.06,69815,Classics,Fiction,Young Adult
 1494,773858,Steve Martin,Born Standing Up: A Comic's Life,3.87,60869,Nonfiction,Biography,Autobiography
 1495,87640,Frank Warren,PostSecret: Extraordinary Confessions from Ordinary Lives (PostSecret),4.01,58841,Nonfiction,Art,Humor
-1496,147915,George R.R. Martin,"A Storm of Swords: Blood and Gold (A Song of Ice and Fire, #3: Part 2 of 2)",4.56,54977,Fantasy,Fiction,Fantasy
 1497,348573,Mary Norton,"The Borrowers (The Borrowers, #1)",4.02,74820,Fantasy,Childrens,Classics
 1498,11602,Stephen King,Hearts in Atlantis,3.8,65063,Horror,Fiction,Fantasy
 1499,28587957,Jodi Picoult,Small Great Things,4.35,73745,Fiction,Contemporary,Audiobook
@@ -1611,7 +1609,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 1616,136782,Anthony Horowitz,"Stormbreaker (Alex Rider, #1)",3.97,67602,Young Adult,Adventure,Fiction
 1617,21745,Lee Child,"Without Fail (Jack Reacher, #6)",4.16,53411,Thriller,Fiction,Mystery
 1618,95617,Francine Rivers,"A Voice in the Wind (Mark of the Lion, #1)",4.6,55556,Christian Fiction,Historical,Historical Fiction
-1619,8726744,Stephenie Meyer,"The Twilight Saga Complete Collection  (Twilight, #1-4 + 3.5)",4.31,56827,Fantasy,Young Adult,Romance
 1620,14817,Philip K. Dick,A Scanner Darkly,4.04,54014,Science Fiction,Fiction,Science Fiction
 1621,6452796,Daniel H. Pink,Drive: The Surprising Truth About What Motivates Us,3.95,55889,Nonfiction,Business,Psychology
 1622,162898,Mark Twain,A Connecticut Yankee in King Arthur's Court,3.76,50112,Classics,Fiction,Fantasy
@@ -1873,7 +1870,7 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 1880,50027,R.A. Salvatore,"Homeland (Forgotten Realms: The Dark Elf Trilogy, #1; Legend of Drizzt, #1)",4.27,49095,Fantasy,Dungeons and Dragons,Forgotten Realms
 1881,100365,Larry Niven,The Mote in God's Eye,4.06,48131,Science Fiction,Fiction,Science Fiction Fantasy
 1882,9572203,Jo Nesbø,"The Snowman (Harry Hole, #7)",4.04,47533,Mystery,Mystery,Crime
-1883,166997,John  Williams,Stoner,4.28,42869,Fantasy,Fiction,Young Adult
+1883,166997,John  Williams,Stoner,4.28,42869,Fiction,Classics,Literature
 1884,24937,David Cote,Wicked: The Grimmerie,4.17,47207,Fantasy,Fiction,Plays
 1885,42607,William Shakespeare,As You Like It,3.83,56395,Classics,Plays,Drama
 1886,95431,Garth Ennis,"Preacher, Volume 1: Gone to Texas",4.16,51267,Sequential Art,Graphic Novels,Sequential Art
@@ -1984,7 +1981,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 1992,759945,David J. Schwartz,The Magic of Thinking Big,4.19,40023,Self Help,Business,Nonfiction
 1993,31332,Anne Rice,"The Vampire Armand (The Vampire Chronicles, #6)",3.75,54919,Horror,Paranormal,Vampires
 1994,17337562,Abbi Glines,"Forever Too Far (Rosemary Beach, #3; Too Far, #3)",4.24,70029,Romance,New Adult,Contemporary
-1995,768889,George R.R. Martin,"A Storm of Swords: Steel and Snow (A Song of Ice and Fire, #3: Part 1 of 2)",4.49,42072,Fantasy,Fiction,Fantasy
 1996,180617,Carlo Collodi,Pinocchio,3.86,48961,Classics,Fantasy,Fiction
 1997,9565548,Robin LaFevers,"Grave Mercy (His Fair Assassin, #1)",3.92,70476,Fantasy,Young Adult,Historical
 1998,18054698,Stormie Omartian,The Power of a Praying Wife,4.31,22618,Christian,Marriage,Nonfiction
@@ -2010,7 +2006,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 2018,13507212,Hilary Mantel,"Bring Up the Bodies (Thomas Cromwell, #2)",4.26,42306,Historical,Historical Fiction,Fiction
 2019,2921082,Rick Riordan,"The Maze of Bones  (The 39 Clues, #1)",3.83,59536,Mystery,Adventure,Young Adult
 2020,603204,Mark Bittman,How to Cook Everything: Simple Recipes for Great Food,4.02,52708,Food and Drink,Cookbooks,Food and Drink
-2021,690926,Stephenie Meyer,"The Twilight Collection (Twilight, #1-3)",3.78,42361,Fantasy,Young Adult,Romance
 2022,857502,Wassily Kandinsky,Concerning the Spiritual in Art,3.81,56444,Art,Nonfiction,Philosophy
 2023,186190,Winston Groom,"Forrest Gump (Forrest Gump, #1)",4.06,45660,Fiction,Humor,Historical
 2024,11991,Albert Camus,The Fall,4.05,43269,History,Nonfiction,War
@@ -2088,7 +2083,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 2098,33290408,Kurt Vonnegut Jr.,"God Bless You, Mr. Rosewater",3.94,40353,Fiction,Classics,Humor
 2099,282282,Yoshiki Nakamura,"Skip Beat!, Vol. 01",4.26,46708,Sequential Art,Manga,Romance
 2100,19030845,Frank Miller,Batman: The Dark Knight Returns #1,4.21,32228,Sequential Art,Comics,Sequential Art
-2101,99298,J.K. Rowling,"The Harry Potter Collection 1-4 (Harry Potter, #1-4)",4.66,43929,Fantasy,Fiction,Young Adult
 2102,6597651,Paolo Bacigalupi,The Windup Girl,3.74,41728,Science Fiction,Fiction,Science Fiction
 2103,92308,Oscar Wilde,The Importance of Being Earnest and Other Plays,4.26,41002,Classics,Plays,Fiction
 2104,9627755,Stephanie Perkins,"Isla and the Happily Ever After (Anna and the French Kiss, #3)",4.1,70995,Young Adult,Romance,Contemporary
@@ -2136,7 +2130,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 2146,11607446,Chris Colfer,"The Wishing Spell (The Land of Stories, #1)",4.21,51752,Fantasy,Childrens,Middle Grade
 2147,2586771,David Ebershoff,The 19th Wife,3.63,44921,Historical,Historical Fiction,Fiction
 2148,44184,Walter Dean Myers,Monster,3.7,47533,Fantasy,Young Adult,Fantasy
-2149,9814682,George R.R. Martin,"A Song of Ice and Fire (A Song of Ice and Fire, #1-4)",4.63,28654,Fantasy,Fiction,Fantasy
 2150,132336,Patricia Cornwell,"Body of Evidence (Kay Scarpetta, #2)",4,50113,Mystery,Mystery,Crime
 2151,16148398,Brian K. Vaughan,Saga #1,4.15,38729,Fantasy,Young Adult,Romance
 2152,1651302,Sara Shepard,"Perfect (Pretty Little Liars, #3)",4.02,50922,Romance,Young Adult,Contemporary
@@ -2513,7 +2506,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 2524,13529,Geraldine Brooks,March,3.73,43737,Sequential Art,Graphic Novels,Nonfiction
 2525,13359067,Lee Child,"A Wanted Man (Jack Reacher, #17)",4,33264,Thriller,Fiction,Mystery
 2526,22369,Grant Morrison,"All-Star Superman, Vol. 1",4.06,35061,Sequential Art,Comics,Sequential Art
-2527,12177850,George R.R. Martin,"A Song of Ice and Fire (A Song of Ice and Fire, #1-5)",4.63,20567,Fantasy,Fiction,Fantasy
 2528,16158558,Nora Roberts,"Dark Witch (The Cousins O'Dwyer Trilogy, #1)",3.91,33481,Romance,Fantasy,Fantasy
 2529,7198988,Alyson Noel,"Dark Flame (The Immortals, #4)",3.73,51250,Young Adult,Fantasy,Fantasy
 2530,25734248,Fiona Barton,The Widow,3.49,36504,Mystery,Fiction,Thriller
@@ -3036,7 +3028,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 3051,193093,Marcia Brown,Stone Soup,4.23,37313,Childrens,Picture Books,Childrens
 3052,213647,Cinda Williams Chima,"The Warrior Heir (The Heir Chronicles, #1)",3.95,40346,Fantasy,Young Adult,Fantasy
 3053,19004663,Janet Evanovich,"Top Secret Twenty-One (Stephanie Plum, #21)",3.79,31294,Mystery,Fiction,Humor
-3054,2223324,John   Williams,Harry Potter and the Chamber of Secrets: Sheet Music for Flute with C.D,4.61,29409,Fantasy,Fiction,Young Adult
 3055,16791,Neil Gaiman,Death: The High Cost of Living Collected,4.21,34252,Sequential Art,Graphic Novels,Sequential Art
 3056,229123,Catherine Marshall,Christy,4.2,37963,Historical,Historical Fiction,Fiction
 3057,13623150,Tahereh Mafi,"Destroy Me (Shatter Me, #1.5)",4.27,46793,Young Adult,Science Fiction,Dystopia
@@ -3076,7 +3067,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 3091,12657,James A. Michener,The Source,4.3,31499,Historical,Historical Fiction,Fiction
 3092,4954,Dave Eggers,You Shall Know Our Velocity!,3.62,23985,Fiction,Novels,Travel
 3094,201126,Michael Rosen,We're Going on a Bear Hunt,4.27,32869,Childrens,Picture Books,Childrens
-3095,6339989,Richelle Mead,"Vampire Academy Collection (Vampire Academy, #1-3)",4.61,30166,Paranormal,Vampires,Young Adult
 3096,673657,David Eddings,"Guardians of the West (The Malloreon, #1)",4.09,37943,Fantasy,Fiction,Fantasy
 3097,7076706,Nora Roberts,The Search,4.11,34973,Mystery,Fiction,Thriller
 3098,13147,James Patterson,"Honeymoon (Honeymoon, #1)",3.81,30756,Mystery,Fiction,Thriller
@@ -3728,7 +3718,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 3750,39030,Douglas Preston,"Reliquary (Pendergast, #2)",4,27362,Thriller,Mystery,Horror
 3751,8459594,Gabrielle Hamilton,"Blood, Bones, and Butter: The Inadvertent Education of a Reluctant Chef",3.71,24531,Food and Drink,Food,Nonfiction
 3752,477597,Agatha Christie,"Poirot Investiga (Hércules Poirot, #3)",4.07,15476,Mystery,Fiction,Short Stories
-3753,10,J.K. Rowling,"Harry Potter Collection (Harry Potter, #1-6)",4.73,24618,Fantasy,Fiction,Young Adult
 3754,30016,Isaac Asimov,The Naked Sun (Robot #2),4.12,26532,Science Fiction,Fiction,Mystery
 3755,114230,Herman Melville,Bartleby the Scrivener,3.9,26265,Fiction,Classics,Short Stories
 3756,23512999,Stephen King,The Bazaar of Bad Dreams,3.92,22054,Horror,Short Stories,Fiction
@@ -3749,7 +3738,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 3772,42986,Herman Wouk,"War and Remembrance (The Henry Family, #2)",4.38,26633,Historical,Historical Fiction,Fiction
 3773,37034,Susan Hill,The Woman in Black,3.68,24200,Horror,Fiction,Gothic
 3774,239810,Barbara Robinson,The Best Christmas Pageant Ever (The Herdmans #1),4.18,32516,Holiday,Christmas,Fiction
-3775,5061675,George R.R. Martin,"A Game of Thrones / A Clash of Kings (A Song of Ice and Fire, #1-2)",4.53,22259,Fantasy,Fiction,Science Fiction Fantasy
 3776,9827,James Clavell,"King Rat (Asian Saga, #4)",4.1,25071,Historical,Historical Fiction,Fiction
 3777,8811134,Michael  Grant,"Fear (Gone, #5)",4.25,33178,Fantasy,Fiction,Fantasy
 3778,24422492,Colleen Hoover,"Never Never: Part Two (Never Never, #2)",4.12,31325,Romance,Young Adult,Contemporary
@@ -5525,7 +5513,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 5551,53969,Mario Vargas Llosa,The Feast of the Goat,4.22,10961,Fiction,Historical,Historical Fiction
 5552,318404,Jordan Sonnenblick,"Drums, Girls & Dangerous Pie (Drums, Girls & Dangerous Pie, #1)",4.25,18551,Young Adult,Realistic Fiction,Fiction
 5553,21412400,Miranda July,The First Bad Man,3.58,15560,Fiction,Contemporary,Novels
-5554,28698,Tad Williams,"To Green Angel Tower, Part 2 (Memory, Sorrow, and Thorn, #3; Part 2)",4.19,18356,Fantasy,Fiction,Fantasy
 5555,17204860,Jay Crownover,"Jet (Marked Men, #2)",4.09,32332,Romance,New Adult,Contemporary
 5556,3656,John Banville,The Sea,3.49,16558,Classics,Fiction,Literature
 5557,18656055,James Patterson,Invisible,4.05,14518,Fantasy,Fiction,Historical
@@ -5919,7 +5906,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 5946,215540,D.J. MacHale,"The Quillan Games (Pendragon, #7)",4.19,18296,Fantasy,Young Adult,Science Fiction
 5947,6820,David Mitchell,number9dream,3.92,13726,Fiction,Cultural,Japan
 5948,3384,Douglas Coupland,Girlfriend in a Coma,3.61,14576,Fiction,Cultural,Canada
-5949,92227,Stephen King,"The Green Mile, Part 1: The Two Dead Girls",4.49,21917,Horror,Fiction,Thriller
 5950,16200,Mark Dunn,Ella Minnow Pea: A Novel in Letters,3.84,19819,Fiction,Humor,Fantasy
 5951,938544,Steven Erikson,"Toll the Hounds (The Malazan Book of the Fallen, #8)",4.33,15942,Fantasy,Fantasy,Epic Fantasy
 5952,1430213,Tess Gerritsen,The Bone Garden ,4.02,16883,Mystery,Fiction,Thriller
@@ -6108,7 +6094,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 6138,233637,Carolyn Keene,The Hidden Staircase (Nancy Drew #2),3.94,24872,Mystery,Fiction,Young Adult
 6139,369110,Taylor Caldwell,Captains and the Kings,4.11,14980,Historical,Historical Fiction,Fiction
 6140,13390528,Daniel Silva,"The Fallen Angel (Gabriel Allon, #12)",4.17,13939,Fiction,Thriller,Mystery
-6141,1317181,J.K. Rowling,"Harry Potter and the Order of the Phoenix (Harry Potter, #5, Part 1)",4.56,16249,Fantasy,Young Adult,Fiction
 6142,97862,Karen Kingsbury,"One Tuesday Morning (9/11, #1)",4.41,14904,Christian,Fiction,Christian Fiction
 6143,8935153,Laurell K. Hamilton,"Hit List (Anita Blake, Vampire Hunter #20)",3.92,21516,Fantasy,Urban Fantasy,Fantasy
 6144,34508,Stephen Briggs,Interesting Times: The Play,4.1,19216,Fantasy,Humor,Fiction
@@ -6180,11 +6165,9 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 6211,16316,Agatha Christie,"The Big Four (Hercule Poirot, #5)",3.6,17820,Mystery,Fiction,Mystery
 6212,16424,Agatha Christie,"Peril at End House (Hercule Poirot, #8)",3.89,19463,Mystery,Fiction,Mystery
 6213,23346719,Renée Knight,Disclaimer,3.58,11329,Thriller,Fiction,Mystery
-6214,15743078,Veronica Roth,"The Divergent Series 2-Book Collection (Divergent, #1-2)",4.56,12490,Young Adult,Science Fiction,Dystopia
 6215,10314376,Umberto Eco,The Prague Cemetery,3.39,11974,Fiction,Historical,Historical Fiction
 6216,7176578,Yann Martel,Beatrice and Virgil,3.13,15076,Fiction,Cultural,Canada
 6217,885744,Hiroyuki Takei,"Shaman King, Vol. 1: A Shaman in Tokyo",4.14,14043,Sequential Art,Manga,Fantasy
-6218,187049,Robert Jordan,"From the Two Rivers: The Eye of the World, Part 1 (Wheel of time, #1-1)",4.26,13686,Fantasy,Fiction,Fantasy
 6219,33426,Michio Kaku,Hyperspace,4.11,13941,Science,Nonfiction,Science
 6220,835623,Steven Pinker,How the Mind Works,3.97,13516,Psychology,Science,Nonfiction
 6221,17925397,Bella Forrest,"A Castle of Sand (A Shade of Vampire, #3)",4.1,18998,Paranormal,Vampires,Fantasy
@@ -6322,7 +6305,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 6353,6931246,China Miéville,Kraken,3.6,16078,Fantasy,Fiction,Fantasy
 6354,10031,Jean-Paul Sartre,The Wall,4.07,12180,Romance,Sports,Sports
 6355,18764826,Lisa Jewell,The House We Grew Up In,3.88,11546,Fiction,Contemporary,Womens Fiction
-6356,13337715,George R.R. Martin,"A Dance with Dragons: Dreams and Dust (A Song of Ice and Fire #5, Part 1 of 2)",4.32,11636,Fantasy,Fiction,Fantasy
 6357,10517947,Brad Thor,"Full Black (Scot Harvath, #10)",4.26,13240,Fiction,Thriller,Action
 6358,17046617,Helen Bryan,The Sisterhood,3.75,7967,Young Adult,Fiction,Womens Fiction
 6359,17488,Enid Blyton,"Five on a Treasure Island (Famous Five, #1)",4.06,15877,Childrens,Fiction,Adventure
@@ -6463,7 +6445,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 6494,8419428,Julie James,"A Lot like Love (FBI/US Attorney, #2)",4.09,23883,Romance,Romance,Contemporary Romance
 6495,123170,Jim Kjelgaard,"Big Red (Big Red, #1)",4.11,15923,Childrens,Childrens,Picture Books
 6496,767307,Caleb Carr,"The Angel of Darkness (Dr. Laszlo Kreizler, #2)",3.94,16343,Mystery,Historical,Historical Fiction
-6497,13337716,George R.R. Martin,"A Dance with Dragons: After the Feast (A Song of Ice and Fire #5, Part 2 of 2)",4.41,11486,Fantasy,Fiction,Fantasy
 6498,386421,Mercer Mayer,I Was So Mad,4.21,15379,Childrens,Picture Books,Childrens
 6499,6224895,Arthur Conan Doyle,"Silver Blaze (The Memoirs of Sherlock Holmes, #1)",4.18,14024,Mystery,Classics,Fiction
 6500,25657,Augusten Burroughs,Sellevision,3.54,12934,Fiction,Humor,Contemporary
@@ -7221,7 +7202,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 7255,17190226,J.C. Reed,"Surrender Your Love (Surrender Your Love, #1)",3.91,20398,Romance,Romance,Contemporary Romance
 7256,17699389,Matthew Mather,CyberStorm,3.75,6028,Fiction,Science Fiction,Thriller
 7257,24476,Chuck Klosterman,Fargo Rock City: A Heavy Metal Odyssey in Rural North Dakota,3.8,11376,Music,Nonfiction,Autobiography
-7258,795034,Tad Williams,"To Green Angel Tower, Part 1 (Memory, Sorrow, and Thorn, #3; Part 1)",4.18,13830,Fantasy,Fiction,Fantasy
 7259,6818019,Nujood Ali,"I Am Nujood, Age 10 and Divorced",3.79,13607,Nonfiction,Autobiography,Memoir
 7260,43798,Anne Rice,The Feast of All Saints,3.83,15221,Fiction,Historical,Historical Fiction
 7261,18453074,Joshua Ferris,To Rise Again at a Decent Hour,3.08,10270,Fiction,Contemporary,Literary Fiction
@@ -8327,7 +8307,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 8368,541341,Mary Downing Hahn,Deep and Dark and Dangerous (A Ghost Story),4.22,12839,Horror,Mystery,Young Adult
 8369,3130430,Melissa Anelli,"Harry, a History: The True Story of a Boy Wizard, His Fans, and Life Inside the Harry Potter Phenomenon",4.09,12308,Nonfiction,Autobiography,Memoir
 8370,3700085,Francisco X. Stork,Marcelo in the Real World,3.95,14651,Young Adult,Fiction,Realistic Fiction
-8371,228199,Stephen King,"The Green Mile, Part 4: The Bad Death of Eduard Delacroix",4.52,12958,Horror,Fiction,Thriller
 8372,8343444,Tere Liye,Daun Yang Jatuh Tak Pernah Membenci Angin,3.97,9974,Novels,Romance,Fiction
 8373,623976,Brandon Sanderson,"Alcatraz Versus the Evil Librarians (Alcatraz, #1)",3.87,13474,Fantasy,Young Adult,Fiction
 8374,13163846,Jeffrey Brown,Darth Vader and Son,4.14,14005,Humor,Sequential Art,Graphic Novels
@@ -8784,7 +8763,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 8826,209966,Warren Ellis,"Planetary, Volume 1: All Over the World and Other Stories",4.21,11808,Sequential Art,Comics,Sequential Art
 8827,17926775,Danielle L. Jensen,"Stolen Songbird (The Malediction Trilogy, #1)",3.97,15026,Fantasy,Young Adult,Romance
 8828,13167847,Andy Cohen,Most Talkative: Stories from the Front Lines of Pop Culture,3.79,9789,Nonfiction,Autobiography,Memoir
-8829,228194,Stephen King,"The Green Mile, Part 2: The Mouse on the Mile",4.47,11985,Horror,Fiction,Thriller
 8830,43345,Mary Higgins Clark,A Cry In The Night,3.84,12157,Mystery,Fiction,Suspense
 8831,100322,Assata Shakur,Assata: An Autobiography,4.48,10518,Nonfiction,Autobiography,Memoir
 8832,32636,Clive Barker,"Days of Magic, Nights of War (Abarat, #2)",4.2,10755,Fantasy,Young Adult,Fiction
@@ -8926,7 +8904,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 8968,1931915,Neal Shusterman,Bruiser,4.04,12499,Young Adult,Fantasy,Fantasy
 8969,331701,Jon J. Muth,Stone Soup,4.15,12956,Childrens,Picture Books,Childrens
 8970,61915,Lois McMaster Bujold,"Falling Free (Vorkosigan Saga, #4)",3.82,12258,Science Fiction,Fiction,Space
-8971,21873331,Gayle Forman,"If I Stay Collection (If I Stay, #1-2)",4.24,7823,Young Adult,Romance,Fiction
 8972,93808,Jeffery Deaver,"The Cold Moon (Lincoln Rhyme, #7)",4.05,11231,Mystery,Thriller,Mystery
 8973,9865,Salman Rushdie,The Moor's Last Sigh,3.92,9459,Fiction,Cultural,India
 8974,8584913,Gayle Tzemach Lemmon,"The Dressmaker of Khair Khana: Five Sisters, One Remarkable Family, and the Woman Who Risked Everything to Keep Them Safe",3.69,10365,Nonfiction,Biography,Autobiography
@@ -9095,13 +9072,11 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 9138,477338,Laurie Faria Stolarz,"Blue is for Nightmares (Blue is for Nightmares, #1)",3.81,15848,Young Adult,Fantasy,Fantasy
 9139,5417,Stephen King,Carrie / 'Salem's Lot / The Shining,4.52,11063,Horror,Fiction,Classics
 9140,1541884,Kelley Armstrong,"Personal Demon (Women of the Otherworld, #8)",4.06,16371,Fantasy,Urban Fantasy,Fantasy
-9141,9329354,Brandon Sanderson,"The Way of Kings, Part 1 (The Stormlight Archive #1.1)",4.67,9792,Fantasy,Fiction,Fantasy
 9142,6517407,Richard Paul Evans,The Christmas List,4.17,10544,Holiday,Christmas,Fiction
 9143,7252,Jenna Jameson,How to Make Love Like a Porn Star: A Cautionary Tale,3.75,9531,Nonfiction,Biography,Autobiography
 9144,85321,Brad Meltzer,The Tenth Justice,3.97,10037,Fiction,Mystery,Thriller
 9145,17333237,Anita Shreve,Stella Bain,3.41,10535,Historical,Historical Fiction,Fiction
 9146,7261549,Derek Landy,"Dark Days (Skulduggery Pleasant, #4)",4.45,12047,Fantasy,Historical,Historical Fiction
-9147,228198,Stephen King,"The Green Mile, Part 3: Coffey's Hands",4.5,12232,Horror,Fiction,Thriller
 9148,111306,Jacquelyn Frank,"Jacob (Nightwalkers, #1)",4.02,17448,Fiction,Mystery,Thriller
 9149,50750,Katie MacAlister,You Slay Me (Aisling Grey #1),4.01,17279,Fantasy,Paranormal,Romance
 9150,17192373,Rachel Joyce,Perfect,3.54,8152,Romance,Young Adult,Contemporary
@@ -9310,7 +9285,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 9357,122756,James Lincoln Collier,My Brother Sam Is Dead,3.39,12817,Historical,Historical Fiction,Young Adult
 9358,72623,Linda Howard,Dream Man,4.04,14604,Romance,Romance,Contemporary Romance
 9359,91017,Tom Holland,Rubicon: The Last Years of the Roman Republic,4.17,9224,History,Nonfiction,History
-9360,71823,Stephen King,"The Green Mile, Part 6: Coffey on the Mile",4.55,11936,Horror,Fiction,Thriller
 9361,170171,Laurie Halse Anderson,Catalyst,3.62,13840,Young Adult,Fiction,Realistic Fiction
 9362,5618698,Molly Harper,"Nice Girls Don't Have Fangs (Jane Jameson, #1)",3.92,18122,Paranormal,Vampires,Fantasy
 9363,31334,Anne Rice,Belinda,3.6,10018,Fiction,Adult Fiction,Erotica
@@ -9863,7 +9837,6 @@ id,book_id,author,title,average_rating,ratings_count,primary_genre,secondary_gen
 9920,11568316,Kami Garcia,"Dream Dark (Caster Chronicles, #2.5)",3.76,12142,Fiction,Mystery,Thriller
 9921,99713,Lawrence Ferlinghetti,A Coney Island of the Mind,4.16,9376,Poetry,Fiction,Classics
 9922,10092,Tad Williams,"Sea of Silver Light (Otherland, #4)",4.11,9758,Fantasy,Science Fiction,Fiction
-9923,228200,Stephen King,"The Green Mile, Part 5: Night Journey",4.51,11442,Horror,Fiction,Thriller
 9924,24769,Scott Westerfeld,"Blue Noon (Midnighters, #3)",3.85,14053,Young Adult,Fantasy,Fantasy
 9925,86737,Mary Hoffman,"City of Masks (Stravaganza, #1)",3.9,12048,Fantasy,Young Adult,Science Fiction
 9926,12522507,Sophie Jordan,"Hidden (Firelight, #3)",3.89,14760,Nonfiction,Economics,Business

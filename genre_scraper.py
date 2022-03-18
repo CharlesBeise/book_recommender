@@ -1,17 +1,21 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+import time
 import timeit
+
+from deprecated_files import sms_service
+
 
 pd.options.mode.chained_assignment = None
 
-start = timeit.default_timer()
+# start = timeit.default_timer()
 
 
 def find_genre(name, title):
     default_url = "https://www.goodreads.com/book/show/"
-    search_url = 'https://www.goodreads.com/search?utf8=%E2%9C%93&query={0}'
-    base_url = 'https://www.goodreads.com'
+    search_url = "https://www.goodreads.com/search?utf8=%E2%9C%93&query={0}"
+    base_url = "https://www.goodreads.com"
 
     headers = {
         "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -21,14 +25,14 @@ def find_genre(name, title):
 
     page = requests.get(url, headers=headers)
 
-    if page.status_code != 200:
-        search_query = title.replace(' ', '+')
-        url = search_url.format(search_query)
-        page = requests.get(url, headers=headers)
-        soup1 = BeautifulSoup(page.content, 'lxml')
-        link = soup1.find('a', {'class', 'bookTitle'}).get('href')
-        first_result = base_url + link
-        page = requests.get(first_result, headers=headers)
+    # if page.status_code != 200:
+    #     search_query = title.replace(' ', '+')
+    #     url = search_url.format(search_query)
+    #     page = requests.get(url, headers=headers)
+    #     soup1 = BeautifulSoup(page.content, 'lxml')
+    #     link = soup1.find('a', {'class', 'bookTitle'}).get('href')
+    #     first_result = base_url + link
+    #     page = requests.get(first_result, headers=headers)
 
     soup = BeautifulSoup(page.content, "lxml")
     genre_box = soup.find_all('a', class_='actionLinkLite bookPageGenreLink')
@@ -41,40 +45,336 @@ def find_genre(name, title):
     return top_genres
 
 
-books_df = pd.read_csv("book_data/updated_books_final_3.csv")
+books_df = pd.read_csv("book_data/updated_books_final_1.csv")
+def whole_thing():
 
-rows, columns = books_df.shape
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(856, rows):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
 
-genres = []
-
-for i in range(250, rows):
-    checker = books_df['primary_genre'][i]
-    if type(checker) == str:
-        continue
-    book = books_df.values[i]
-    book_id = str(book[1])
-    book_title = str(book[3]).split('(')[0]
-
-    try:
-        genres = find_genre(book_id, book_title)
-    except Exception:
         try:
             genres = find_genre(book_id, book_title)
         except Exception:
-            print(book_id)
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                pass
 
-    if len(genres) > 2:
-        books_df['primary_genre'][i] = genres[0]
-        books_df['secondary_genre'][i] = genres[1]
-        books_df['tertiary_genre'][i] = genres[2]
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
 
+        genres = []
+
+
+for i in range(3):
+    whole_thing()
+
+books_df.to_csv("book_data/updated_books_final_2.csv", index=False)
+
+sms_service.send_msg("done")
+
+
+def one():
+    books_df = pd.read_csv("book_data/updated_books_final_1.csv")
+    rows, columns = books_df.shape
     genres = []
+    for i in range(1000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
 
-books_df.to_csv("book_data/updated_books_final.csv", index=False)
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
 
-end = timeit.default_timer()
-time = end - start
-print("Total time:", time, "seconds, or", time/60, "minutes.")
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a1.csv", index=False)
+
+
+def two():
+    books_df = pd.read_csv("book_data/updated_books_final_2.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(1000, 2000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a2.csv", index=False)
+
+
+def three():
+    books_df = pd.read_csv("book_data/updated_books_final_3.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(2000, 3000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a3.csv", index=False)
+
+
+def four():
+    books_df = pd.read_csv("book_data/updated_books_final_4.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(3000, 4000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a4.csv", index=False)
+
+
+def five():
+    books_df = pd.read_csv("book_data/updated_books_final_5.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(4000, 5000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a5.csv", index=False)
+
+
+def six():
+    books_df = pd.read_csv("book_data/updated_books_final_6.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(5000, 6000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a6.csv", index=False)
+
+
+def seven():
+    books_df = pd.read_csv("book_data/updated_books_final_7.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(6000, 7000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a7.csv", index=False)
+
+
+def eight():
+    books_df = pd.read_csv("book_data/updated_books_final_8.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(7000, 8000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a8.csv", index=False)
+
+
+def nine():
+    books_df = pd.read_csv("book_data/updated_books_final_9.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(8000, 9000):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a9.csv", index=False)
+
+
+def ten():
+    books_df = pd.read_csv("book_data/updated_books_final_10.csv")
+    rows, columns = books_df.shape
+    genres = []
+    for i in range(9000, rows):
+        checker = books_df['primary_genre'][i]
+        if type(checker) == str:
+            continue
+        book = books_df.values[i]
+        book_id = str(book[1])
+        book_title = str(book[3]).split('(')[0]
+
+        try:
+            genres = find_genre(book_id, book_title)
+        except Exception:
+            try:
+                genres = find_genre(book_id, book_title)
+            except Exception:
+                print(book_id)
+
+        if len(genres) > 2:
+            books_df['primary_genre'][i] = genres[0]
+            books_df['secondary_genre'][i] = genres[1]
+            books_df['tertiary_genre'][i] = genres[2]
+
+        genres = []
+    books_df.to_csv("book_data/updated_books_final_a10.csv", index=False)
+
+
+# end = timeit.default_timer()
+# time = end - start
+# print("Total time:", time, "seconds, or", time/60, "minutes.")
 # send_msg('done')
 
 # Range: 5      Seconds: 18     Minutes: 0.3    Errors: None

@@ -15,7 +15,7 @@ from gui_py_files.top_10 import Ui_Dialog as T_10_Dialog
 from gui_py_files.top_10_result import Ui_Dialog as T_10_R_Dialog
 
 
-from goodreads_scraper import find_book
+from utility_files import goodreads_scraper
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -77,7 +77,7 @@ class BookDialog(QDialog, Book_Dialog):
 
     def loadpage(self):
         """This loads the page elements"""
-        cover, description = find_book(str(self.book['book_id']))
+        cover, description = goodreads_scraper.find_book(str(self.book['book_id']))
         title = "<b><center><p style='font-size: 15px'>" + self.book['title'].split('(')[0] + "</p></center></b>"
         author = "<b><center><p style='font-size: 15px'>By " + self.book['author'] + "</p></center></b>"
         self.BookTitleMsg.setText(title)
@@ -132,6 +132,7 @@ class SearchAuthorDialog(QDialog, SA_Dialog):
         books = json.load(file)
         authors = books.keys()
         completer = QCompleter(authors)
+        completer.setCaseSensitivity(False)
         self.AuthorSearchBox.setCompleter(completer)
         self.connectAuthorSignals()
 
@@ -251,6 +252,12 @@ class SearchSimilarDialog(QDialog, S_Dialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        file = open('book_data/books_and_genres.json')
+        books = json.load(file)
+        titles = books.keys()
+        completer = QCompleter(titles)
+        completer.setCaseSensitivity(False)
+        self.SearchBox.setCompleter(completer)
         self.connectSearchSignals()
 
     def connectSearchSignals(self):
@@ -294,12 +301,27 @@ class SimilarResult(QDialog, SR_Dialog):
         self.title = title
         # The title of the book the user searched is entered into the ARUserAuthor box
         book_name = "<b><center><p style='font-size: 20px'>" + self.title + "</p></center></b>"
-        file = open('book_data/author_ranked.json')
-        book_dict = json.load(file)
-        self.selection = book_dict[self.author]
+        file = open('book_data/books_and_genres.json')
+        self.book_dict = json.load(file)
+        file2 = open('book_data/books_by_title.json')
+        self.master_books = json.load(file2)
+        self.target_genres = self.book_dict[title]['genres']
+        self.similar_list = []
+        self.findSimilar()
         self.populateBoxes()
         self.connectSignals()
         self.SRUserBook.setText(book_name)
+
+    def myFunc(self, a):
+        return self.book_dict[a]['rating']
+
+    def findSimilar(self):
+        for book in self.book_dict:
+            if self.book_dict[book]['genres'] == self.target_genres:
+                if book != self.title:
+                    self.similar_list.append(book)
+        self.similar_list.sort(reverse=True, key=self.myFunc)
+
 
     def connectSignals(self):
         """Here are the clickable buttons on the page"""
@@ -318,26 +340,28 @@ class SimilarResult(QDialog, SR_Dialog):
 
     def populateBoxes(self):
         pairs = []
-        for book in self.selection:
-            title = book['title']
+        for book in self.similar_list:
+            title = book
             if len(title) > 50:
                 title = title.split('(')[0]
-            pairs.append([title, book['author']])
-        self.Book1.setText(f'1. {pairs[0][0]} \n by {pairs[0][1]}')
-        self.Book2.setText(f'2. {pairs[1][0]} \n by {pairs[1][1]}')
-        self.Book3.setText(f'3. {pairs[2][0]} \n by {pairs[2][1]}')
-        self.Book4.setText(f'4. {pairs[3][0]} \n by {pairs[3][1]}')
-        self.Book5.setText(f'5. {pairs[4][0]} \n by {pairs[4][1]}')
-        self.Book6.setText(f'6. {pairs[5][0]} \n by {pairs[5][1]}')
-        self.Book7.setText(f'7. {pairs[6][0]} \n by {pairs[6][1]}')
-        self.Book8.setText(f'8. {pairs[7][0]} \n by {pairs[7][1]}')
-        self.Book9.setText(f'9. {pairs[8][0]} \n by {pairs[8][1]}')
-        self.Book_10.setText(f'10. {pairs[9][0]} \n by {pairs[9][1]}')
+            pairs.append([title, f"by {self.master_books[book]['author']}"])
+        while len(pairs) < 10:
+            pairs.append([f"Sorry, I couldn't find 10 books", ""])
+        self.Book1.setText(f'1. {pairs[0][0]} \n {pairs[0][1]}')
+        self.Book2.setText(f'2. {pairs[1][0]} \n {pairs[1][1]}')
+        self.Book3.setText(f'3. {pairs[2][0]} \n {pairs[2][1]}')
+        self.Book4.setText(f'4. {pairs[3][0]} \n {pairs[3][1]}')
+        self.Book5.setText(f'5. {pairs[4][0]} \n {pairs[4][1]}')
+        self.Book6.setText(f'6. {pairs[5][0]} \n {pairs[5][1]}')
+        self.Book7.setText(f'7. {pairs[6][0]} \n {pairs[6][1]}')
+        self.Book8.setText(f'8. {pairs[7][0]} \n {pairs[7][1]}')
+        self.Book9.setText(f'9. {pairs[8][0]} \n {pairs[8][1]}')
+        self.Book_10.setText(f'10. {pairs[9][0]} \n {pairs[9][1]}')
 
     def loadBookPage(self, pick):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
         any parameters, but this will change in future versions."""
-        book = self.selection[pick]
+        book = self.master_books[self.similar_list[pick]]
         book_dialog = BookDialog(book)
         book_dialog.exec()
 
@@ -363,6 +387,7 @@ class Top10Dialog(QDialog, T_10_Dialog):
         books = json.load(file)
         genres = books.keys()
         completer = QCompleter(genres)
+        completer.setCaseSensitivity(False)
         self.genreBox.setCompleter(completer)
 
     def connectSignals(self):
@@ -424,17 +449,19 @@ class Top10Result(QDialog, T_10_R_Dialog):
             title = book['title']
             if len(title) > 50:
                 title = title.split('(')[0]
-            pairs.append([title, book['author']])
-        self.Book1.setText(f'1. {pairs[0][0]} \n by {pairs[0][1]}')
-        self.Book2.setText(f'2. {pairs[1][0]} \n by {pairs[1][1]}')
-        self.Book3.setText(f'3. {pairs[2][0]} \n by {pairs[2][1]}')
-        self.Book4.setText(f'4. {pairs[3][0]} \n by {pairs[3][1]}')
-        self.Book5.setText(f'5. {pairs[4][0]} \n by {pairs[4][1]}')
-        self.Book6.setText(f'6. {pairs[5][0]} \n by {pairs[5][1]}')
-        self.Book7.setText(f'7. {pairs[6][0]} \n by {pairs[6][1]}')
-        self.Book8.setText(f'8. {pairs[7][0]} \n by {pairs[7][1]}')
-        self.Book9.setText(f'9. {pairs[8][0]} \n by {pairs[8][1]}')
-        self.Book_10.setText(f'10. {pairs[9][0]} \n by {pairs[9][1]}')
+            pairs.append([title, f"by {book['author']}"])
+        while len(pairs) < 10:
+            pairs.append([f"Sorry, I couldn't find 10 books in this genre", ""])
+        self.Book1.setText(f'1. {pairs[0][0]} \n {pairs[0][1]}')
+        self.Book2.setText(f'2. {pairs[1][0]} \n {pairs[1][1]}')
+        self.Book3.setText(f'3. {pairs[2][0]} \n {pairs[2][1]}')
+        self.Book4.setText(f'4. {pairs[3][0]} \n {pairs[3][1]}')
+        self.Book5.setText(f'5. {pairs[4][0]} \n {pairs[4][1]}')
+        self.Book6.setText(f'6. {pairs[5][0]} \n {pairs[5][1]}')
+        self.Book7.setText(f'7. {pairs[6][0]} \n {pairs[6][1]}')
+        self.Book8.setText(f'8. {pairs[7][0]} \n {pairs[7][1]}')
+        self.Book9.setText(f'9. {pairs[8][0]} \n {pairs[8][1]}')
+        self.Book_10.setText(f'10. {pairs[9][0]} \n {pairs[9][1]}')
 
     def loadBookPage(self, pick):
         """When the user selects a book, this loads a Book dialog with that book's information. Currently does not pass
